@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy Peter - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box; /* Ensures padding/borders don’t cause overflow */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFC0CB; /* Soft pink background */
+            color: #333;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: #FF69B4; /* Darker pink for headings */
+        }
+
+        a {
+            color: #FF69B4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            padding: 50px;
+            text-align: center;
+            max-width: 100%; /* Prevents overflow */
+        }
+
+        .btn {
+            background-color: #FF69B4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #FF1493;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: #FF69B4;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #FF1493;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #FF69B4;
+            margin: 5px 0;
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease; /* Fixed typo: 'cognitivs' -> 's' */
+                z-index: 100; /* Ensures it’s on top */
+            }
+
+            .nav-links.active {
+                max-height: 500px; /* Adjust as needed */
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block; /* Shows hamburger on mobile */
+            }
+        }
+
+        /* Home Section */
+        #home {
+            background-color: white;
+            padding: 100px 50px;
+        }
+
+        #home h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        #home p {
+            font-size: 24px;
+            color: #666;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #FFE4E1; /* Light pink */
+        }
+
+        /* Education Section */
+        #education {
+            background-color: white;
+        }
+
+        #education ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #education ul li {
+            margin: 10px 0;
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: #FFE4E1;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 100%; /* Prevents overflow */
+        }
+
+        .project-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: white;
+        }
+
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-width: 100%; /* Prevents overflow */
+        }
+
+        #contact input, #contact textarea {
+            width: 100%;
+            max-width: 300px; /* Limits max width */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #contact textarea {
+            height: 100px;
+        }
+
+        .contact-details p {
+            margin: 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #FF69B4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul
+        </nav>
+    </header>
+
+    <section id="home" class="section">
+        <h1>Joy Peter</h1>
+        <p>Communicator | Creative | Tech Enthusiast</p>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>Hello! I’m Joy Peter, a passionate communicator and multi-skilled creative with an HND in Mass Communication. I thrive on storytelling, visual expression, and using technology to connect people.</p>
+    </section>
+
+    <section id="education" class="section">
+        <h2>Educational Background</h2>
+        <ul>
+            <li>HND in Mass Communication - The Federal Polytechnic Bauchi</li>
+            <li>Certificate in Sustainable Development Goals - UNDP Advocacy Training</li>
+            <li>3MTT Training in AI and Machine Learning</li>
+            <li>Ntech Training in Graphic Design and Web Development</li>
+        </ul>
+        <a href="./joycv.pdf" download class="btn">Download CV</a>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Dream the Moment EventandStyle</h3>
+                <p>Event planning and style services in Lagos.</p>
+                <a href="https://dreamthemoment.com" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Artistry Creamy Pastry & More</h3>
+                <p>Creative pastries and small chops.</p>
+                <a href="https://artistrypastry.com" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Oritshe T-shirt Brand</h3>
+                <p>T-shirts with bold, art-infused messages.</p>
+                <a href="https://oritshe.com" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>AI for Event Management</h3>
+                <p>AI tools for event planning (3MTT project).</p>
+                <a href="https://aievents.com" target="_blank">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <p>Let’s connect! I’m open to collaborations, internships, and creative partnerships.</p>
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div class="contact-details">
+            <p><strong>Phone:</strong> 07062405420</p>
+            <p><strong>Email:</strong> <a href="mailto:dreamthemomenteventandstyle@gmail.com">dreamthemomenteventandstyle@gmail.com</a></p>
+            <p><strong>Instagram:</strong> <a href="https://instagram.com/Ornky_ventures" target="_blank">@Ornky_ventures</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Joy Peter. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+                // Close the menu on mobile
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! Thank you for reaching out.');
+            this.reset();
+        });
+
+        // Toggle menu for mobile
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
